@@ -1,0 +1,47 @@
+<div *ngIf="this.errorMessage" class="alert alert-danger" role="alert">
+    {{ this.errorMessage }}
+</div>
+
+<h2>I-Line Lookup Service</h2>
+<br>
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <div class="mb-3">
+        <label for="address" class="form-label">IP Address</label>
+        <input class="form-control" id="address" name="address" [(ngModel)]="ilineForm.address" required
+               #addressField="ngModel"/>
+        <div [hidden]="!form.submitted || addressField.valid" class="field-error">Enter a valid IPv4 or IPv6 address</div>
+    </div>
+
+    <div class="mb-3">
+        <button [disabled]="this.loading" type="submit" class="btn btn-primary">
+            Look up
+            <span *ngIf="this.loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                  style="margin-left: 5px"></span>
+        </button>
+    </div>
+</form>
+
+<div *ngIf="this.response" style="margin-top: 1.5rem">
+    <br>
+    <h2>Result</h2>
+    <p>Result for IP
+        address {{ this.response.ipAddress}} {{ this.response.hostname != this.response.ipAddress ? " and hostname " + this.response.hostname : ""}}</p>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th scope="col" style="width: 15%;"><b>Name</b></th>
+                <th scope="col" style="width: 25%;">Description</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr *ngFor="let server of this.response.response | orderBySID">
+                <td>{{ server.serverName }}</td>
+                <td>{{ server.serverInfo | correctServerDescriptionEncoding }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
