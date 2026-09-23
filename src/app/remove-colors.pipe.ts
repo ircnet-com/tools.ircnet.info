@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {RemoveColorsService} from "./remove-colors.service";
+import { RemoveColorsService } from "./remove-colors.service";
 
 @Pipe({
   name: 'removeColors',

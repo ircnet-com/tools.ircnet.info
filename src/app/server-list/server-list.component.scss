@@ -1,0 +1,347 @@
+.mode-toggle {
+  flex: 0 0 auto;
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  gap: 2px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+
+  .mode-btn {
+    border-radius: 999px !important;
+    border: 0 !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 0.45rem 0.7rem;
+    font-weight: 600;
+    line-height: 1;
+    color: #495057;
+
+    i, svg {
+      width: 1.1rem;
+      height: 1.1rem;
+      font-size: 1.1rem;
+      line-height: 0;
+      display: inline-block;
+      fill: currentColor;
+    }
+
+    &.mode-btn-sasl {
+      i, svg {
+        width: 1.35rem;
+        height: 1.35rem;
+        font-size: 1.35rem;
+        margin-top: -1px;
+      }
+    }
+
+    &[for="modeOpen"] {
+      i, svg {
+        width: 1.15rem;
+        height: 1.15rem;
+        font-size: 1.15rem;
+      }
+    }
+  }
+
+  .btn-check:checked + .mode-btn {
+    i, svg {
+      color: #0d6efd !important;
+      fill: #0d6efd !important;
+    }
+  }
+
+  .btn-check:checked + .mode-btn {
+    background: #ffffff !important;
+    color: #0d6efd !important;
+    border-radius: 999px !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.02);
+
+    i {
+      color: #0d6efd !important;
+    }
+
+    &.mode-btn-sasl {
+      color: #0d6efd !important;
+    }
+  }
+}
+
+.filter-inline {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.sid-filter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.6rem;
+  font-weight: 600;
+
+  .btn-close {
+    width: 0.5rem;
+    height: 0.5rem;
+    opacity: 0.9;
+  }
+}
+
+.filter-pill {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+
+  background: #f1f3f5;
+  border: 1px solid #dee2e6;
+  border-radius: 999px;
+  padding: 4px;
+}
+
+.filter-pill__modes {
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  white-space: nowrap;
+
+  padding-right: 6px;
+}
+
+.filter-pill__modes::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-pill__modes .mode-toggle,
+.filter-pill__modes .mode-btn {
+  white-space: nowrap;
+}
+
+.filter-pill__action {
+  appearance: none;
+  border: 0;
+  background: transparent;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 38px;
+  width: 44px;
+
+  border-left: 1px solid #dee2e6;
+  border-top-right-radius: 999px;
+  border-bottom-right-radius: 999px;
+
+  color: #6c757d;
+}
+
+.filter-pill__action:hover {
+  color: #495057;
+}
+
+.filter-pill__action:focus-visible {
+  outline: 2px solid rgba(13, 110, 253, 0.45);
+  outline-offset: 2px;
+}
+
+.filter-pill__action--active {
+  color: #0d6efd !important;
+}
+
+
+@media (max-width: 360px) {
+  .mode-toggle .mode-btn {
+    padding: 0.4rem 0.55rem;
+    gap: 4px;
+    font-size: 0.9rem;
+  }
+
+  .mode-toggle .mode-btn i,
+  .mode-toggle .mode-btn svg {
+    width: 1.0rem;
+    height: 1.0rem;
+  }
+
+  .mode-toggle .mode-btn.mode-btn-sasl i,
+  .mode-toggle .mode-btn.mode-btn-sasl svg {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  .filter-pill__action {
+    width: 40px;
+  }
+}
+
+/* desktop: no scroll */
+@media (min-width: 768px) {
+  .filter-pill {
+    width: auto;
+  }
+
+  .filter-pill__modes {
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .country-collapse {
+    width: auto;
+    max-width: 320px;
+
+    select {
+      width: 240px;
+    }
+  }
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(13, 110, 253, 0.04) !important;
+  transition: background-color 0.1s ease;
+}
+
+.server-badges {
+  margin-left: .4rem;
+  display: inline-flex;
+  gap: .25rem;
+  vertical-align: middle;
+}
+
+.chip {
+  display: inline-block;
+  padding: .1rem .35rem;
+  font-size: .7rem;
+  font-weight: 600;
+  line-height: 1.1;
+  border-radius: .35rem;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: transparent;
+  white-space: nowrap;
+}
+
+.chip--open { color: #146c43; }
+.chip--sasl { color: #0a58ca; }
+
+.country-filter-link {
+  display: inline-flex;
+  align-items: center;
+  color: #6c757d;
+
+  svg {
+    width: 0.95rem;
+    height: 0.95rem;
+    flex: 0 0 auto;
+  }
+
+  &:hover {
+    color: #0d6efd;
+  }
+}
+
+.country-collapse {
+  width: 100%;
+}
+
+@media (max-width: 576px) {
+  .filter-bar > .card-body > .d-flex > .text-muted.small.fw-semibold {
+    display: none !important;
+  }
+}
+
+/* Slightly tighter on phones */
+@media (max-width: 480px) {
+  .filter-pill {
+    padding: 2px;
+    gap: 0;
+  }
+
+  .filter-pill__modes {
+    padding-right: 4px;
+    scroll-padding-right: 44px;
+  }
+
+  .mode-toggle .mode-btn {
+    padding: 0.42rem 0.55rem;
+    gap: 5px;
+  }
+
+  .filter-pill__action {
+    width: 40px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 360px) {
+  .filter-pill {
+    padding: 1px;
+  }
+
+  .mode-toggle .mode-btn {
+    padding: 0.4rem 0.45rem;
+    gap: 4px;
+    font-size: 0.95rem;
+  }
+
+  .filter-pill__action {
+    width: 36px;
+    height: 36px;
+  }
+
+  .filter-pill__modes {
+    scroll-padding-right: 40px;
+  }
+}
+
+/* Tabella con bordi e linee interne di spessore uniforme */
+::ng-deep table.rounded-table-wrapper,
+table.rounded-table-wrapper {
+  border-radius: 0.5rem !important;
+  overflow: hidden !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  /* Definizione del bordo unico esterno ed interno (1px solid) */
+  border: 2px solid rgba(255, 255, 255, 0.15) !important;
+
+  /* Applica la stessa linea a tutte le celle interne */
+  th, td {
+    border-right: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+  }
+
+  /* Rimuove il doppio bordo sull'ultima colonna e sull'ultima riga */
+  tr th:last-child,
+  tr td:last-child {
+    border-right: none !important;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none !important;
+  }
+
+  /* Angoli superiori arrotondati */
+  thead tr:first-child th:first-child {
+    border-top-left-radius: 0.5rem !important;
+  }
+  thead tr:first-child th:last-child {
+    border-top-right-radius: 0.5rem !important;
+  }
+
+  /* Angoli inferiori arrotondati (sotto l'ultima riga dei dati) */
+  tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 0.5rem !important;
+  }
+  tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 0.5rem !important;
+  }
+}
+
+/* Informazioni DataTables esterne */
+::ng-deep .dataTables_info {
+  padding-top: 0.75rem !important;
+  color: #8c98a4 !important;
+  font-size: 0.875rem !important;
+}

@@ -10,8 +10,9 @@ import {NgIf} from "@angular/common";
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
-  title = '#Tools @ IRCnet - by doni (doni@irc.it)';
+  title = 'ircnet.info';
   embed: boolean = false;
+  currentYear: number = new Date().getFullYear(); // <--- Aggiunta qui
 
   constructor(private route: ActivatedRoute) {
   }

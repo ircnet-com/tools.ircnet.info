@@ -1,0 +1,239 @@
+<div *ngIf="this.errorMessage" class="alert alert-danger" role="alert">
+    {{ this.errorMessage }}
+</div>
+
+<ng-container *ngIf="data?.countriesWithServers">
+
+    <div class="filter-bar card shadow-sm mb-4">
+        <div class="card-body py-2 px-3">
+            <div class="d-flex flex-wrap align-items-center gap-4">
+
+                <div class="text-muted small fw-semibold">Filter</div>
+
+                <div class="filter-inline">
+                    <div class="filter-pill" role="group" aria-label="Filter controls">
+                        <!-- scrollable left side -->
+                        <div class="filter-pill__modes" #modeScroll aria-label="Server mode">
+                            <div class="mode-toggle p-1 d-inline-flex align-items-center">
+                                <input type="radio" class="btn-check" name="mode" id="modeAll"
+                                       [value]="'ALL'" [(ngModel)]="mode" (ngModelChange)="onModeChanged($event)" autocomplete="off">
+                                <label class="btn mode-btn" for="modeAll">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+                                    </svg>
+                                    ALL
+                                </label>
+
+                                <input type="radio" class="btn-check" name="mode" id="modeOpen"
+                                       [value]="'OPEN'" [(ngModel)]="mode" (ngModelChange)="onModeChanged($event)" autocomplete="off">
+                                <label class="btn mode-btn" for="modeOpen">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-globe" viewBox="0 0 16 16">
+                                        <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m7.5-6.923c-.67.204-1.335.82-1.887 1.855A8 8 0 0 0 5.145 4H7.5zM4.09 4a9.3 9.3 0 0 1 .64-1.539 7 7 0 0 1 .597-.933A7.03 7.03 0 0 0 2.255 4zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a7 7 0 0 0-.656 2.5zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5zM8.5 5v2.5h2.99a12.5 12.5 0 0 0-.337-2.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5zM5.145 12q.208.58.468 1.068c.552 1.035 1.218 1.65 1.887 1.855V12zm.182 2.472a7 7 0 0 1-.597-.933A9.3 9.3 0 0 1 4.09 12H2.255a7 7 0 0 0 3.072 2.472M3.82 11a13.7 13.7 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5zm6.853 3.472A7 7 0 0 0 13.745 12H11.91a9.3 9.3 0 0 1-.64 1.539 7 7 0 0 1-.597.933M8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855q.26-.487.468-1.068zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.7 13.7 0 0 1-.312 2.5m2.802-3.5a7 7 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7 7 0 0 0-3.072-2.472c.218.284.418.598.597.933M10.855 4a8 8 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4z"/>
+                                    </svg>
+                                    OPEN
+                                </label>
+
+                                <input type="radio" class="btn-check" name="mode" id="modeSasl"
+                                       [value]="'SASL'" [(ngModel)]="mode" (ngModelChange)="onModeChanged($event)" autocomplete="off">
+                                <label class="btn mode-btn mode-btn-sasl" for="modeSasl">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-check" viewBox="0 0 16 16">
+                                        <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/>
+                                        <path d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z"/>
+                                    </svg>
+                                    SASL
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- fixed right side -->
+                        <button
+                                type="button"
+                                class="filter-pill__action"
+                                [ngClass]="{ 'filter-pill__action--active': country || effectiveSid || isSortActive }"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#countryFilterCollapse"
+                                aria-controls="countryFilterCollapse"
+                                [attr.aria-expanded]="(country || effectiveSid || isSortActive) ? 'true' : 'false'"
+                                aria-label="Filter and sort options">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-funnel" viewBox="0 0 16 16" aria-hidden="true">
+                                <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .39.812L10 7.5V13a.5.5 0 0 1-.724.447l-2-1A.5.5 0 0 1 7 12V7.5L1.61 1.812A.5.5 0 0 1 1.5 1.5"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapse country-collapse mt-2 pb-2" id="countryFilterCollapse" [ngClass]="{ 'show': country || effectiveSid || isSortActive }">
+                <ng-container *ngIf="!effectiveSid">
+                    <label for="countryFilterMobile" class="text-muted small fw-semibold mb-1">Country</label>
+                    <select
+                            id="countryFilterMobile"
+                            class="form-select form-select-sm"
+                            [(ngModel)]="country"
+                            (ngModelChange)="syncUrlWithFilters()">
+                        <option [ngValue]="null">All countries</option>
+                        <option
+                                *ngFor="let countryOption of data?.countriesWithServers"
+                                [ngValue]="getCountryAnchor(countryOption)">
+                            {{ countryOption.countryName }}
+                        </option>
+                    </select>
+                </ng-container>
+
+                <div class="filter-option mt-2">
+                    <label for="serverSort" class="text-muted small fw-semibold mb-1">Sort</label>
+                    <select
+                            id="serverSort"
+                            class="form-select form-select-sm"
+                            [(ngModel)]="sortMode"
+                            (ngModelChange)="onSortChanged($event)">
+                        <option [ngValue]="'DEFAULT'">Default (Country / SID)</option>
+                        <option [ngValue]="'USERS_DESC'">Users: high to low</option>
+                        <option [ngValue]="'USERS_ASC'">Users: low to high</option>
+                    </select>
+                </div>
+
+                <div class="mt-2" *ngIf="effectiveSid">
+                    <span class="badge text-bg-primary sid-filter-badge">
+                        SID: {{ effectiveSid }}
+                        <button
+                                type="button"
+                                class="btn-close btn-close-white"
+                                aria-label="Remove SID filter"
+                                (click)="clearSid()"></button>
+                    </span>
+                </div>
+            </div>
+
+<!--            <div class="mt-2">
+                <label for="sidFilter" class="text-muted small fw-semibold mb-1">SID</label>
+                <div class="input-group input-group-sm">
+                    <input
+                            id="sidFilter"
+                            type="text"
+                            class="form-control"
+                            placeholder="e.g. 276"
+                            [(ngModel)]="currentSid"
+                            (ngModelChange)="syncUrlWithFilters()">
+                    <button
+                            class="btn btn-outline-secondary"
+                            type="button"
+                            (click)="currentSid = null; syncUrlWithFilters()"
+                            [disabled]="!currentSid">
+                        Clear
+                    </button>
+                </div>
+            </div>-->
+        </div>
+    </div>
+
+    <ng-container *ngIf="!flatView && !isSortActive && !effectiveSid; else flat_content">
+        <div *ngFor="let country of filteredCountries; let i = index">
+            <br *ngIf="i != 0">
+            <h2 [attr.id]="getCountryAnchor(country)">
+                {{ country.countryName }}
+            </h2>
+            Total users: {{ getDisplayedCountryUsers(country) }}
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead class="table-bordered">
+                    <tr>
+                        <th scope="col" style="width: 20%;">Name</th>
+                        <th scope="col" style="width: 25%;">Description</th>
+                        <th scope="col">Users</th>
+                        <th scope="col">SID</th>
+                        <th scope="col">Version</th>
+                        <th>Last seen</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr *ngFor="let server of country.serverList"
+                        [ngClass]="{ 'table-danger': server.lastSeen != data.lastMapReceived }">
+                        <td>
+                            {{server.serverName}}
+                            <span class="server-badges" *ngIf="mode === 'ALL'">
+                            <span *ngIf="server.open" class="chip chip--open">OPEN</span>
+                            <span *ngIf="server.sasl" class="chip chip--sasl">SASL</span>
+                          </span>
+                        </td>
+                        <td>{{server.serverInfo | correctServerDescriptionEncoding}}</td>
+                        <td>{{server.userCount}}</td>
+                        <td>{{server.sid}}</td>
+                        <td>{{server.version}}</td>
+
+                        <td *ngIf="server.lastSeen == data.lastMapReceived;else other_content">
+                            now
+                        </td>
+                        <ng-template #other_content>
+                            <td>{{getFormattedLastSeenTime(server.lastSeen)}} ago</td>
+                        </ng-template>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-template #flat_content>
+        <div *ngIf="isSortActive" class="d-flex flex-column mb-3">
+            <h2 class="h4 mb-1">Servers</h2>
+            <div class="text-muted small">{{ sortDescription }}</div>
+        </div>
+        <p *ngIf="effectiveSid && !isSortActive">Total users: {{ displayedTotalUsers }}</p>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="table-bordered">
+                <tr>
+                    <th *ngIf="isUsersSort" scope="col" class="text-end text-nowrap" style="width: 3.5rem;">#</th>
+                    <th scope="col" style="width: 20%;">Name</th>
+                    <th scope="col" style="width: 25%;">Description</th>
+                    <th scope="col" style="width: 14%;">Country</th>
+                    <th scope="col">Users<span *ngIf="sortMode === 'USERS_ASC'" aria-label=" sorted ascending"> &uarr;</span><span *ngIf="sortMode === 'USERS_DESC'" aria-label=" sorted descending"> &darr;</span></th>
+                    <th scope="col">SID</th>
+                    <th scope="col">Version</th>
+                    <th>Last seen</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let server of displayedFlatServers; let rank = index"
+                    [ngClass]="{ 'table-danger': server.lastSeen != data.lastMapReceived }">
+                    <td *ngIf="isUsersSort" class="text-end text-nowrap fw-semibold" style="width: 3.5rem;">{{ rank + 1 }}</td>
+                    <td>
+                        {{ server.serverName }}
+                        <span class="server-badges" *ngIf="mode === 'ALL'">
+                            <span *ngIf="server.open" class="chip chip--open">OPEN</span>
+                            <span *ngIf="server.sasl" class="chip chip--sasl">SASL</span>
+                        </span>
+                    </td>
+                    <td>{{ server.serverInfo | correctServerDescriptionEncoding }}</td>
+                    <td>{{ server.countryName }}</td>
+                    <td>{{ server.userCount }}</td>
+                    <td>{{ server.sid }}</td>
+                    <td>{{ server.version }}</td>
+
+                    <td *ngIf="server.lastSeen == data.lastMapReceived;else other_content_flat">
+                        now
+                    </td>
+                    <ng-template #other_content_flat>
+                        <td>{{ getFormattedLastSeenTime(server.lastSeen) }} ago</td>
+                    </ng-template>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </ng-template>
+
+    <br/>
+
+    <i>
+        <small>{{ isUnfilteredAllView ? 'Total servers linked' : 'Servers linked' }}: {{ displayedTotalServers }}</small>
+        <br>
+        <small>{{ isUnfilteredAllView ? 'Total users' : 'Users' }}: {{ displayedTotalUsers }}</small>
+        <br>
+        <small>Last server map received: {{getFormattedDateDifference(data.lastMapReceived)}} ago</small>
+    </i>
+    <br><br>
+</ng-container>

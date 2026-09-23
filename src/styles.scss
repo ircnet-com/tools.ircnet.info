@@ -1,10 +1,34 @@
-/* You can add global styles to this file, and also import other style files */
+/* ===================================================
+   1. PERSONALIZZAZIONE COLORI BOOTSTRAP (Prima dell'import)
+   =================================================== */
 
-/* Change bootstrap colors */
+// Palette estratta dall'immagine
+$primary: #78e2a0;        // Verde menta per link e comandi
+$dark: #121212;           // Sfondo scuro
+$body-bg: #121212;        // Sfondo generale del sito
+$body-color: #c5c8c6;     // Colore del testo principale
+
+// Variables Bootstrap prima dell'import
+$navbar-dark-color: #78e2a0;
+$navbar-dark-hover-color: #a8f5c8;
+
+// Alert e stati
 $success-bg-subtle: #d4edda;
 $success-border-subtle: #c3e6cb;
 
+// Importazione di Bootstrap
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
+
+
+/* ===================================================
+   2. STILI CUSTOM E SOVRASCRITTURE CSS
+   =================================================== */
+
+body {
+  padding: 0 0 1rem 0;
+  background-color: $body-bg;
+  color: $body-color;
+}
 
 .container-fluid {
   padding-right: 1.5em;
@@ -12,42 +36,93 @@ $success-border-subtle: #c3e6cb;
   padding-top: 1em;
 }
 
+/* Stile della Navbar e del Logo/Brand tipo badge */
+.navbar {
+  padding: .5rem 1rem;
+  background-color: #121212 !important;
+}
+
+/* Logo "#Tools" in stile rettangolo verde con testo scuro */
+.navbar-dark .navbar-brand,
+.navbar-brand {
+  background-color: #78e2a0 !important;
+  color: #121212 !important;
+  font-weight: bold;
+  padding: 0.0rem 0.4rem !important;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+/* Link del menu di navigazione */
+.navbar-dark .navbar-nav .nav-link {
+  color: #A9B7AE !important;
+  text-decoration: underline;
+  text-underline-position: under;
+  margin-right: 0.5rem;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: #78E2A0 !important;
+}
+
+.navbar-dark .navbar-nav .nav-link.active {
+  color: #78E2A0 !important;
+}
+
+/* Stile generale dei link nel testo e nelle tabelle */
+a {
+  color: #78e2a0;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #a8f5c8;
+}
+
+/* Personalizzazione Tabelle per la dark mode */
 table {
+  color: #c5c8c6;
+}
+
+.table {
+  --bs-table-bg: transparent;
+  --bs-table-color: #c5c8c6;
+  border-color: #2a2a2a;
+}
+/* .table-danger {
+  --bs-table-bg: #59A475;
+  --bs-table-color: #121212;
+  --bs-table-border-color: #000;
+  --bs-table-striped-bg: #000;
+  --bs-table-striped-color: #000;
+  --bs-table-active-bg: #000;
+  --bs-table-active-color: #000;
+  --bs-table-hover-bg: #000;
+}
+*/
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  background-color: #1a1a1a;
+  color: #c5c8c6;
 }
 
 td {
   white-space: normal !important;
 }
 
-body {
-  padding: 0 0 1rem 0;
-}
-
-.navbar-dark .navbar-brand {
-  color: #fff !important;
-}
-
-.navbar {
-    padding: .5rem 1rem;
-}
-
-.navbar-brand {
-  padding-left: .3125rem !important;
-}
-
+/* Altri stili */
 .alert {
   margin-top: .5rem;
 }
 
 .mt-3 {
-  margin-bottom: 1rem!important;
+  margin-bottom: 1rem !important;
 }
 
 .field-error {
   width: 100%;
   margin-top: .25rem;
   font-size: 80%;
-  color: #dc3545
+  color: #dc3545;
 }
 
 .dataTables_empty {
@@ -66,3 +141,237 @@ body {
   padding: 0;
 }
 
+/* ===================================================
+   STILE PAGINAZIONE STILE NAVBAR
+   =================================================== */
+
+/* Contenitore principale */
+.pagination,
+.dataTables_wrapper .dataTables_paginate {
+  margin-top: 1rem;
+  display: inline-flex;
+  gap: 0.25rem; /* Spaziatura pulita tra i pulsanti */
+}
+
+/* Pulsanti e numeri generali (Stile link Navbar) */
+.pagination .page-item .page-link,
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  background-color: #121212 !important;
+  color: #78e2a0 !important;
+  text-decoration: none !important;
+  border: 1px solid #2a2a2a !important;
+  border-radius: 4px !important;
+  padding: 0.35rem 0.75rem;
+  box-shadow: none !important;
+}
+
+/* Hover sui numeri (effetto passaggio mouse) */
+.pagination .page-item .page-link:hover,
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  background-color: #1a1a1a !important;
+  color: #a8f5c8 !important;
+}
+
+/* Pagina ATTIVA (Stile Badge "#Tools") */
+.pagination .page-item.active .page-link,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+  background-color: #78e2a0 !important;
+  color: #121212 !important;
+  font-weight: bold !important;
+  text-decoration: none !important;
+  border-color: #78e2a0 !important;
+}
+
+/* Pulsanti DISABILITATI (Frecce « e ‹ inattive) */
+.pagination .page-item.disabled .page-link,
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+  background-color: #121212 !important;
+  color: #4a5568 !important;
+  text-decoration: none !important;
+  border-color: #2a2a2a !important;
+  cursor: not-allowed;
+}
+
+/* Stile uniformato all'altezza dei select (form-select-sm) */
+.filter-chip {
+  font-size: 0.875rem; /* Stessa dimensione testo dei form-select-sm */
+  padding: 0.25rem 0.75rem; /* Padding identico ai select di Bootstrap */
+  height: 31px; /* Altezza standard di form-select-sm */
+  border-radius: 0.375rem; /* Border radius Bootstrap form control */
+  font-weight: 600;
+  border: 1px solid transparent;
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+/* ALL */
+.chip--all {
+  color: #a0a0a0;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-check:checked + .chip--all {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: #ffffff;
+}
+
+/* OPEN (Blu) */
+.chip--open {
+  color: #58A675;
+  background-color: rgba(46, 204, 113, 0.1);
+  border-color: rgba(46, 204, 113, 0.3);
+}
+
+.btn-check:checked + .chip--open,
+.chip--open:hover {
+  color: #58A675;
+  background-color: rgba(46, 204, 113, 0.25);
+  border-color: #58A675;
+}
+
+/* SASL (Verde) */
+.chip--sasl {
+  color: #58A675;
+  background-color: rgba(52, 152, 219, 0.1);
+  border-color: #58A675;
+}
+
+.btn-check:checked + .chip--sasl,
+.chip--sasl:hover {
+  color: #58A675;
+  background-color: rgba(52, 152, 219, 0.25);
+  border-color: #58A675;
+} 
+
+tr.server-split {
+  background-color: #59A475 !important;
+  color: #111111 !important;
+
+  td {
+    background-color: #59A475 !important;
+    color: #111111 !important;
+  }
+}
+
+/* Rilevatore netsplit (riga evidenziata uguale su ALL, OPEN e SASL) */
+tr.server-split,
+tr.server-split > td {
+  background-color: #58a675 !important;
+  color: #111111 !important;
+}
+
+/* Colori specifici dei badge */
+.badge.bg-primary {
+  background-color: #0d6efd !important; /* Blu per OPEN */
+  color: #ffffff !important;
+}
+
+.badge.bg-success {
+  background-color: #198754 !important; /* Verde per SASL */
+  color: #ffffff !important;
+}
+
+.badge.bg-secondary {
+  background-color: #6c757d !important; /* Grigio per ALL */
+  color: #ffffff !important;
+}
+
+
+
+/* Stile base dei pulsanti del selettore (quando NON sono selezionati) */
+.btn-group {
+  .btn-outline-secondary,
+  .btn-outline-primary,
+  .btn-outline-success {
+    color: #ffffff !important;
+    border-color: #ffffff !important;
+/*  font-weight: 700 !important; */
+    background-color: transparent;
+
+    &:hover {
+      color: #ffffff !important;
+      border-color: #ffffff !important;
+      opacity: 0.85;
+    }
+  }
+}
+
+/* Stile dei pulsanti QUANDO SONO SELEZIONATI */
+.btn-check:checked {
+  /* ALL (Grigio) */
+  + .btn-outline-secondary {
+    background-color: #6c757d !important;
+    border-color: #ffffff !important;
+	font-weight: normal;
+    color: #ffffff !important;
+  }
+
+  /* OPEN (Blu) */
+  + .btn-outline-primary {
+    background-color: #0d6efd !important;
+    border-color: #ffffff !important;
+		font-weight: normal;
+    color: #ffffff !important;
+  }
+
+  /* SASL (Verde) */
+  + .btn-outline-success {
+    background-color: #198754 !important;
+    border-color: #ffffff !important;
+		font-weight: normal;
+    color: #ffffff !important;
+  }
+}
+
+/* Personalizzazione dimensioni e peso font dei badge nella tabella */
+.server-badges .badge {
+  font-size: 0.65rem !important;   /* Riduce la dimensione del testo (default Bootstrap ~0.75rem) */
+  font-weight: 400 !important;    /* Rimuove il bold (peso normale) */
+  padding: 0.2rem 0.4rem !important; /* Riduce il padding interno per rendere il badge più compatto */
+  line-height: 1 !important;
+}
+
+/* Arrotondamento e bordi uniformi per tutte le tabelle dell'applicazione */
+::ng-deep table.rounded-table-wrapper,
+table.rounded-table-wrapper {
+  border-radius: 0.5rem !important;
+  overflow: hidden !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  /* Bordo esterno uniforme */
+  border: 2px solid rgba(255, 255, 255, 0.15) !important;
+
+  /* Celle interne e griglie divisorie */
+  th, td {
+    border-right: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+  }
+
+  tr th:last-child,
+  tr td:last-child {
+    border-right: none !important;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none !important;
+  }
+
+  /* Angoli superiori */
+  thead tr:first-child th:first-child {
+    border-top-left-radius: 0.5rem !important;
+  }
+  thead tr:first-child th:last-child {
+    border-top-right-radius: 0.5rem !important;
+  }
+
+  /* Angoli inferiori */
+  tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 0.5rem !important;
+  }
+  tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 0.5rem !important;
+  }
+}

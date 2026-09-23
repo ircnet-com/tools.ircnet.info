@@ -1,30 +1,35 @@
 export interface ServerList {
-  countriesWithServers: ({
-    totalUsers: number;
-    countryCode: string;
-    serverList: ({
-      lastVersion: string;
-      flags: string;
-      serverName: string;
-      lastTrace: string;
-      lastLinks: null;
-      version: string;
-      serverStartTime: string;
-      sid: string; lastSeen: string;
-      userCount: number;
-      serverInfo: string;
-      operators: {
-        nick: string; host:
-          string; user: string
-      }[];
-      mask: string;
-      lastILine: string
-    } | {
-      lastVersion: string;
-      flags: string; serverName: string; lastTrace: string; lastLinks: null; version: string; serverStartTime: null; sid: string; lastSeen: string; userCount: number; serverInfo: string; operators: null; mask: string; lastILine: string
-    } | { lastVersion: string; flags: string; serverName: string; lastTrace: string; lastLinks: null; version: string; serverStartTime: null; sid: string; lastSeen: string; userCount: number; serverInfo: string; operators: { nick: string; host: string; user: string }[]; mask: string; lastILine: string })[]; countryName: string
-  });
+  countriesWithServers: CountryWithServers[];
   totalUsers: number;
+  totalServers: number;
   lastMapReceived: string;
   now: string;
+}
+
+export interface CountryWithServers {
+  countryCode: string;
+  countryCodeAlpha2?: string;
+  countryName: string;
+  totalUsers: number;
+  serverList: ServerEntry[];
+}
+
+export interface ServerEntry {
+  serverName: string;
+  sid: string;
+  serverInfo: string;
+  lastSeen: string;
+  userCount: number;
+  version: string;
+  open: boolean;
+  sasl: boolean;
+
+  [key: string]: unknown;
+}
+
+export interface ServersBySidResponse {
+  serverDTOList: ServerEntry[];
+  numericCountryCode: number | null;
+  countryName: string | null;
+  countryCodeAlpha2?: string;
 }

@@ -1,5 +1,5 @@
 <nav *ngIf="!embed" class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <span class="navbar-brand"><strong>#Tools</strong></span>
+    <span class="navbar-brand">#Tools</span>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -26,6 +26,11 @@
     <router-outlet></router-outlet>
 </div>
 
-<footer class="page-footer font-small blue pt-4">
-  <div class="footer-copyright text-center py-3">&copy; 2019 #Tools &#64; IRCnet - by doni (doni&#64;irc.it)</div>
+<footer class="footer text-center py-3 mt-4">
+  <div class="container">
+    <p class="footer-text mb-0 small">
+      &copy; {{ currentYear }} #Tools &#64; IRCnet - by doni 
+      (<a href="mailto:doni@irc.it">doni&#64;irc.it</a>)
+    </p>
+  </div>
 </footer>
