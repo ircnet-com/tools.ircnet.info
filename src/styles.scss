@@ -245,21 +245,21 @@ td {
   background-color: rgba(52, 152, 219, 0.25);
   border-color: #58A675;
 } 
-
+/*
 tr.server-split {
-  background-color: #59A475 !important;
+  background-color: #a4bc01 !important;
   color: #111111 !important;
 
   td {
-    background-color: #59A475 !important;
+    background-color: #a4bc01 !important;
     color: #111111 !important;
   }
 }
-
+*/
 /* Rilevatore netsplit (riga evidenziata uguale su ALL, OPEN e SASL) */
 tr.server-split,
 tr.server-split > td {
-  background-color: #58a675 !important;
+  background-color: #a4bc01 !important;
   color: #111111 !important;
 }
 

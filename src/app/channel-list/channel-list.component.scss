@@ -47,3 +47,8 @@ table.rounded-table-wrapper {
   color: #8c98a4 !important;
   font-size: 0.875rem !important;
 }
+@media (max-width: 575.98px) {
+  form .row > div:not(:last-child) {
+    margin-bottom: 0.75rem;
+  }
+}
