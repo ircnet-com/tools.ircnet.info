@@ -57,7 +57,7 @@ export class ChannelListComponent implements OnInit, AfterViewInit {
       lengthChange: false,
       searching: false,
       serverSide: true,
-      processing: true,
+      processing: false,
       order: [[ 1, 'desc' ]],
       columns: [
         {
